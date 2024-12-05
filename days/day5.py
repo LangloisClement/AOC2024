@@ -4,7 +4,7 @@ from pkg_resources import resource_stream
 rules = []
 printings = []
 break_print = False
-with resource_stream("input", "test.txt") as textInput:
+with resource_stream("input", "D5.txt") as textInput:
     for line in textInput.readlines():
         line = line.decode().strip()
         if line == "":
@@ -39,4 +39,11 @@ def part1():
 
 
 def part2():
-    pass
+    sorted_printing=[]
+    for printing in printings:
+        if not all((printing[i],printing[j]) in rules for i in range(len(printing)-1) for j in range(i+1,len(printing))):
+            sorted_printing.append(sorted(printing,key=cmp_to_key(compa)))
+    return reduce(
+        (lambda a, b: a + b),
+        [printing[len(printing) // 2] for printing in sorted_printing],
+    )
