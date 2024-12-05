@@ -2,14 +2,14 @@ from functools import reduce
 from pkg_resources import resource_stream
 from re import findall
 
+matrice = []
+with resource_stream("input", "D4.txt") as textInput:
+    for line in textInput.readlines():
+        line = line.decode().strip()
+        matrice.append(line)
 
 def part1():
     ret = 0
-    matrice = []
-    with resource_stream("input", "D4.txt") as textInput:
-        for line in textInput.readlines():
-            line = line.decode().strip()
-            matrice.append(line)
     # horizontal
     for l in range(len(matrice)):
         for c in range(len(matrice[l]) - 3):
@@ -35,11 +35,6 @@ def part1():
 
 def part2():
     ret = 0
-    matrice = []
-    with resource_stream("input", "D4.txt") as textInput:
-        for line in textInput.readlines():
-            line = line.decode().strip()
-            matrice.append(line)
     for l in range(len(matrice) - 2):
         for c in range(len(matrice[0]) - 2):
             grid = [[matrice[l + i][c + j] for j in range(3)] for i in range(3)]

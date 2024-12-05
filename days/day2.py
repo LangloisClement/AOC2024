@@ -1,5 +1,12 @@
 from pkg_resources import resource_stream
 
+reports: list[list[int]] = []
+ret = 0
+with resource_stream("input", "D2.txt") as textInput:
+    for line in textInput.readlines():
+        line = line.decode().strip()
+        reports.append([int(num) for num in line.split()])
+
 
 def reportSafe(report: list[int]):
     isAscending = report[0] < report[1]
@@ -18,24 +25,12 @@ def reportSafe(report: list[int]):
 
 
 def part1():
-    reports: list[list[int]] = []
-    ret = 0
-    with resource_stream("input", "D2.txt") as textInput:
-        for line in textInput.readlines():
-            line = line.decode().strip()
-            reports.append([int(num) for num in line.split()])
     for report in reports:
         ret += 1 if reportSafe(report) else 0
     return ret
 
 
 def part2():
-    reports: list[list[int]] = []
-    ret = 0
-    with resource_stream("input", "D2.txt") as textInput:
-        for line in textInput.readlines():
-            line = line.decode().strip()
-            reports.append([int(num) for num in line.split()])
     for report in reports:
         if reportSafe(report):
             ret += 1
