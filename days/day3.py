@@ -16,6 +16,7 @@ def part1():
 
     return ret
 
+
 def part2():
     ret = 0
     instruct = []
@@ -23,14 +24,14 @@ def part2():
         for line in textInput.readlines():
             line = line.decode().strip()
             instruct.append(findall(r"mul\(\d{1,3},\d{1,3}\)|do\(\)|don't\(\)", line))
-    enabled=True
+    enabled = True
     for i in instruct:
         for s in i:
-            if s=="do()":
-                enabled=True
-            elif s=="don't()":
-                enabled=False
+            if s == "do()":
+                enabled = True
+            elif s == "don't()":
+                enabled = False
             else:
-                s=findall(r"mul\((\d{1,3}),(\d{1,3})\)", s)
+                s = findall(r"mul\((\d{1,3}),(\d{1,3})\)", s)
                 ret += reduce((lambda x, y: int(x) * int(y)), s[0]) if enabled else 0
     return ret
