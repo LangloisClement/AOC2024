@@ -24,6 +24,22 @@ def is_incremant(target: int, nums: list[int], res: int = 0) -> bool:
         return True
 
 
+def is_concat(target: int, nums: list[int], res: int = 0) -> bool:
+    if res == target:
+        return True
+    if res > target or nums == []:
+        return False
+    if not is_concat(target, nums[1:], res + nums[0]):  # ADD
+        if not is_concat(target, nums[1:], res * nums[0]):  # MULT
+            return is_concat(
+                target, nums[1:], res=int(str(res) + str(nums[0]))
+            )  # CONCAT
+        else:
+            return True
+    else:
+        return True
+
+
 def part1():
     valide = [t for t in equations if is_incremant(t[0], t[1])]
     ret = 0
@@ -33,4 +49,8 @@ def part1():
 
 
 def part2():
-    pass
+    valide = [t for t in equations if is_concat(t[0], t[1])]
+    ret = 0
+    for t in valide:
+        ret += t[0]
+    return ret
