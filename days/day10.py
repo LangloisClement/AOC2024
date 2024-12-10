@@ -43,10 +43,53 @@ def traverse_trail(i, j):
     return ret2
 
 
+def traverse_trail_rate(i, j, path: list[tuple[int, int]]):
+    current = grid[i][j]
+    path.append((i, j))
+    ret2 = set()
+    if current == 9:
+        return path
+    if i + 1 < L and grid[i + 1][j] == current + 1:
+        res = traverse_trail_rate(i + 1, j, path)
+        if type(res) is list:
+            ret2.add(tuple(res))
+        else:
+            ret2.update(res)
+    if j + 1 < C and grid[i][j + 1] == current + 1:
+        res = traverse_trail_rate(i, j + 1, path)
+        if type(res) is list:
+            ret2.add(tuple(res))
+        else:
+            ret2.update(res)
+    if i - 1 >= 0 and grid[i - 1][j] == current + 1:
+        res = traverse_trail_rate(i - 1, j, path)
+        if type(res) is list:
+            ret2.add(tuple(res))
+        else:
+            ret2.update(res)
+    if j - 1 >= 0 and grid[i][j - 1] == current + 1:
+        res = traverse_trail_rate(i, j - 1, path)
+        if type(res) is list:
+            ret2.add(tuple(res))
+        else:
+            ret2.update(res)
+    return ret2
+
+
 def part1():
     trails = []
     for trail_head in trail_heads:
         trails.append(traverse_trail(*trail_head))
+    ret = 0
+    for trail in trails:
+        ret += len(trail)
+    return ret
+
+
+def part2():
+    trails = []
+    for trail_head in trail_heads:
+        trails.append(traverse_trail_rate(*trail_head, []))
     ret = 0
     for trail in trails:
         ret += len(trail)
