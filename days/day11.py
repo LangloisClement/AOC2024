@@ -1,10 +1,5 @@
 from pkg_resources import resource_stream
 
-rock_line=[]
-with resource_stream("input", "test.txt") as textInput:
-    for line in textInput.readlines():
-        line = line.decode().strip()
-        rock_line = [int(c) for c in line.split()]
 
 
 def part1():
