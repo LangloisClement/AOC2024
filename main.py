@@ -11,9 +11,9 @@ from days import (
     # day9,
     # day10,
     # day11,
-    # day12,
-    day14,
+    day12,
+    # day14,
 )
 
 print("Merry Advent of Code 2024!")
-print(day14.part1())
+print(day12.part1())
